@@ -5,7 +5,6 @@ const {
   render_tasks,
   render_assigned_tasks,
 } = require("../controller/render_tasks"); // controllers
-const { userModel, taskModel, render_properties } = require("../model/models"); //-------MODELS
 //
 //
 router.get("/tasks", (req, res) => {

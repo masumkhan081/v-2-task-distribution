@@ -3,27 +3,45 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
+const queries = require("../model/queries");
 require("dotenv").config();
 const token_sec = process.env.JWT_SECRET;
-// models
-const { userModel, taskModel } = require("../model/models");
+const connectionString = process.env.POSTGRES_URI;
+const { Pool } = require("pg");
 
 passport.use(
   new LocalStrategy(async function (username, password, done) {
-    const user = await userModel.findOne({ email: username, password }, null);
-    if (!user) {
-      return done(null, { status: "null", email: username, password }); // i can cut email from here...
-    } else {
-      return done(null, {
-        id: user.id,
-        status: "logged-in",
-        email: username,
-        password,
-        role: user.role,
-        name: user.name,
-        designation: user.designation,
-      });
-    }
+    console.log(username + "   at least <>   " + password);
+    const pool = new Pool({
+      connectionString,
+    });
+    pool.query(
+      "SELECT * FROM users WHERE email = $1 AND password = $2",
+      [username, password],
+      (err, result) => {
+        if (err) {
+          console.log("err-> login -> select " + err.message);
+        } else {
+          console.log("   login seems ..." + JSON.stringify(result.rows));
+
+          if (result.rowCount == 0 && result.rows[0] == undefined) {
+            return done(null, { status: "null", email: username, password }); // i can cut email from here...
+          } else {
+            let foundUser = result.rows[0];
+            console.log("  < > ");
+            return done(null, {
+              id: foundUser.user_id,
+              status: "logged-in",
+              email: foundUser.email,
+              password: foundUser.password,
+              role: foundUser.role == "super-admin" ? "admin" : foundUser.role,
+              name: foundUser.name,
+              designation: foundUser.designation,
+            });
+          }
+        }
+      }
+    );
   })
 );
 passport.serializeUser((user, done) => {
@@ -84,7 +102,6 @@ router.post("/auth/signin", passport.authenticate("local"), (req, res) => {
     const { role } = req.user;
     if (role == "admin") {
       res.redirect("/user/team-leaders");
-      // res.redirect("/tasks/allocated-tasks");
     }
     if (role == "team-leader" || role == "team-member") {
       res.redirect("/user/my-team");

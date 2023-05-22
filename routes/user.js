@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-// models  & controller
-const { userModel, taskModel, render_properties } = require("../model/models");
+// controller
 const { render_employees } = require("../controller/render_employees");
 const { sendEmail } = require("../controller/emailSender");
 require("dotenv").config();
