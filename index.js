@@ -70,6 +70,9 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 //
+app.get("/", (req, res) => {
+  res.render("page_landing");
+});
 app.use("", require("./routes/auth"));
 app.use("", require("./routes/user"));
 app.use("", require("./routes/task"));
