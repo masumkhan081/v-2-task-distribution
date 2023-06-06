@@ -1,3 +1,7 @@
+const { Pool, Client } = require("pg");
+require("dotenv").config();
+
+//
 const queries = {};
 const render_properties = {
   limit: 5,
@@ -5,11 +9,10 @@ const render_properties = {
 /*
 drop table tasks; drop table groups
 */
-queries.getTime = 'SELECT NOW() AS "theTime"';
 
 queries.createTableTask = `CREATE TABLE IF NOT EXISTS Tasks (
-       taskid SERIAL PRIMARY KEY,
-       task_name VARCHAR(100) NOT NULL,
+  taskid SERIAL PRIMARY KEY,
+  task_name VARCHAR(100) NOT NULL,
   by_id int NOT NULL,
   to_id int NOT NULL,
   to_name VARCHAR(50) NOT NULL,
@@ -64,6 +67,27 @@ queries.addGroup = (groupname) => {};
 queries.updateGroup = (groupid, groupname) => {};
 queries.deleteGroup = (groupid) => {};
 
+//
+//const connectionString = process.env.POSTGRES_URI;
+// let PoolCreation = {
+//   create_pool(conString) {
+//     const poolObj = new Pool({
+//       conString,
+//     });
+//     return () => {
+//       return poolObj;
+//     };
+//   },
+//   create_client(conString) {
+//     const clientObj = new Client({
+//       conString,
+//     });
+//     return () => {
+//       return clientObj;
+//     };
+//   },
+// };
+//const pool = PoolCreation.create_pool(connectionString)();
+//const client = PoolCreation.create_client(connectionString)();
 
-
-module.exports = {queries,render_properties };
+module.exports = { queries, render_properties };

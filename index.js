@@ -3,6 +3,7 @@ const passport = require("passport");
 const session = require("express-session");
 const flash = require("connect-flash");
 const ejslayout = require("express-ejs-layouts");
+const { Client } = require("pg");
 const { queries } = require("./model/queries");
 // env vars
 require("dotenv").config();
@@ -14,33 +15,31 @@ app.set("view engine", "ejs");
 app.use(ejslayout);
 app.use(express.urlencoded({ extended: true }));
 //
-const { Client, Pool } = require("pg");
+
 const client = new Client(connectionString);
+
 
 client
   .connect()
   .then(() => {
     console.log("connected");
-    //
 
-    const pool = new Pool({
-      connectionString,
-    });
-    pool.query(queries.createTableGroup, [], (err, result) => {
+    // //
+    client.query(queries.createTableGroup, [], (err, result) => {
       if (err) {
         console.log("err-> users " + err.message);
       } else {
         console.log("tbl-> users");
       }
     });
-    pool.query(queries.createTableTask, [], (err, result) => {
+    client.query(queries.createTableTask, [], (err, result) => {
       if (err) {
         console.log("err-> Tasks " + err.message);
       } else {
         console.log("tbl-> Tasks");
       }
     });
-    pool.query(
+    client.query(
       queries.insert_super_admin.insertion_query,
       queries.insert_super_admin.insertion_values,
       (err, res) => {
@@ -52,8 +51,8 @@ client
       }
     );
   })
-  .catch((err) => console.error("connection error", err.stack));
-//
+  .catch((err) => console.error("connection error", JSON.stringify(err)));
+
 app.listen(port, () => {
   console.log("server running ...");
 });
@@ -70,9 +69,6 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 //
-app.get("/", (req, res) => {
-  res.render("page_landing");
-});
 app.use("", require("./routes/auth"));
 app.use("", require("./routes/user"));
 app.use("", require("./routes/task"));

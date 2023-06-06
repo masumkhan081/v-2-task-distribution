@@ -21,6 +21,7 @@ passport.use(
       (err, result) => {
         if (err) {
           console.log("err-> login -> select " + err.message);
+          res.redirect("/auth/signin");
         } else {
           console.log("   login seems ..." + JSON.stringify(result.rows));
 

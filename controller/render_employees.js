@@ -1,5 +1,5 @@
-const {   Pool } = require("pg");
-const {render_properties} = require("../model/queries");
+const { Pool } = require("pg");
+const { render_properties } = require("../model/queries");
 require("dotenv").config();
 const connectionString = process.env.POSTGRES_URI;
 //

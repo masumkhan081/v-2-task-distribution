@@ -1,16 +1,17 @@
 <div class="container-fluid row mt-sm-4 mt-1" style="min-height: 480px;">
       <!--start col-1 -->
-      <div class="col-md-3 d-flex flex-column gap-sm-5">
+      <div class="col-md-4 d-flex flex-column gap-sm-5">
             <div>
-                  <span class="rounded text-success pb-1 h6">
+                  <span class="rounded  text-center d-block w-100  pb-1 h5" style="color:rgb(131, 98, 54)">
                         <i class="fas fa-th-list"></i> Whats Been Used: </span>
-                  <ul class="mt-2 list-unstyled d-flex flex-column gap-sm-2 gap-1 text-wrap">
-                        <span class="text-center text-success rounded bg-success bg-opacity-10">nodemailer</span>
-                        <span class="text-center text-success rounded bg-success bg-opacity-10">passport</span>
-                        <span class="text-center text-success rounded bg-success bg-opacity-10">express-session</span>
-                        <span class="text-center text-success rounded bg-success bg-opacity-10">json-web-token</span>
-                        <li class="text-center text-success rounded bg-success bg-opacity-10">mongoose, MongoDB Atlas
-                        </li>
+                  <ul class="mt-sm-3 mt-1  list-unstyled d-flex flex-column gap-sm-3 gap-1 text-wrap"
+                        style="color:rgb(119, 88, 48);font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        <li class="text-center rounded bg-info bg-opacity-10">postgreSQL (pg), ElephantSQL </li>
+                        <span class="text-center rounded bg-primary bg-opacity-10">Express, Joi, ejs </span>
+                        <span class="text-center rounded bg-white bg-opacity-50">Nodemailer</span>
+                        <span class="text-center rounded bg-dark bg-opacity-10">Passport</span>
+                        <span class="text-center rounded bg-danger bg-opacity-10">json-web-token</span>
+                        <span class="text-center rounded bg-warning bg-opacity-10">Booststrap</span>
                   </ul>
             </div>
             <div>
@@ -20,19 +21,20 @@
             </div>
       </div>
       <!--start col-2 -->
-      <div class="col-md-9 ">
-            <span class="rounded text-success pb-1 h6">
+      <div class="col-md-8 ">
+            <span class="rounded  text-center d-block w-100 pb-1 h5" style="color:rgb(131, 98, 54)">
                   <i class="fas fa-hand-point-right"></i> Read Me </span>
-            <ul class="d-flex flex-column gap-1 text-wrap text-start ps-4 align-content-between list-unstyled">
+            <ul class="mt-sm-3 mt-1 d-flex flex-column gap-1 text-wrap text-start ps-4 align-content-between list-unstyled">
                   <li>
-                  <li class="rounded"><strong>Objectives: </strong></li>
+                  <li class="rounded"><strong class="badge text-dark" style="font-size:14px   ;background-color:rgb(209, 172, 124)">Objectives: </strong></li>
                   <ul>
                         <li>Implementation of a task deistribution system for soft. developers </li>
                   </ul>
                   </li>
                   <li>
                   <li>
-                  <li class="rounded"><strong>Brief: </strong></li>
+                         <li class="rounded"><strong class="badge text-dark" style="font-size:14px   ;background-color:rgb(209, 172, 124)">Brief: </strong></li>
+
                   <ul>
                         <li>Accounts with 3 different roles: admin, team-leader/project manager, developer</li>
                         <li>Admin can add/remove a team leader via email invitation link (jwt)</li>
@@ -43,7 +45,8 @@
                   </ul>
                   </li>
                   <li>
-                  <li class="rounded"><strong>Limitation/Missings: </strong></li>
+                        <li class="rounded"><span class="badge text-dark" style="font-size:14px; background-color:rgb(209, 172, 124)">Limitation/Missings: </span></li>
+
                   <ul>
                         <li>Due date, assigned date, and completion date should not be text. To be updated soon</li>
                         <li>Scope for update of a rofile over invitation link if the user is already existing </li>
